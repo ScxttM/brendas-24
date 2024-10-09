@@ -1,25 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arapey&display=swap");
 @font-face {
   font-family: AmsterdamTwo;
   src: url(./assets/amsterdam-two-ttf.ttf);
 }
 
-.arapey-regular {
-  font-family: "Arapey", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.arapey-regular-italic {
-  font-family: "Arapey", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
 :root {
   font-family: "Arapey", serif;
-}
-
-.navbar {
-  font-family: AmsterdamTwo;
+  color: #c6302c;
 }

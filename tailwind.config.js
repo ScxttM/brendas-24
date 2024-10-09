@@ -2,20 +2,21 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-  },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: [
-      {
-        brendasTheme: {
-          primary: "#c6302c",
-          secondary: "#f6d860",
-          accent: "#37cdbe",
-          neutral: "#3d4451",
-          "base-100": "#ffffff",
-        },
+    colors: {
+      red: {
+        50: "#fdf3f3",
+        100: "#fce5e4",
+        200: "#fbcecd",
+        300: "#f7acaa",
+        400: "#f07c79",
+        500: "#e5524e",
+        600: "#c6302c",
+        700: "#b02925",
+        800: "#922522",
+        900: "#792523",
+        950: "#410f0e",
       },
-    ],
+    },
   },
+  plugins: [],
 };
