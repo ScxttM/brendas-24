@@ -1,14 +1,18 @@
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 text-primary mt-8 px-9">
-      <div className="navbar-start"></div>
-      <div className="navbar-center">
-        <a className="text-3xl" href="#">
-          Brenda's 24th
-        </a>
+    <header>
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <div className="hidden md:block opacity-0">11 DE OCTUBRE 2024</div>
+          <div>
+            <a className="text-3xl" href="#">
+              BRENDA'S 24
+            </a>
+          </div>
+          <div>11 DE OCTUBRE 2024</div>
+        </div>
       </div>
-      <div className="navbar-end text-2xl">October 11th</div>
-    </div>
+    </header>
   );
 };
 
