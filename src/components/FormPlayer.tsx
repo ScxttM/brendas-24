@@ -50,6 +50,19 @@ const FormPlayer = (props: {
       });
   };
 
+  const deletePlayer = (id: number) => {
+    axios
+      .delete(API_URL + "/leaderboard/player/" + id)
+      .then((res) => {
+        props.closeModal();
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response?.data) toast.error(err.response.data.error);
+      });
+  };
+
   return (
     <form className="max-w-sm mx-auto" onSubmit={(e) => handleSubmit(e)}>
       <div className="mb-5">
@@ -67,10 +80,19 @@ const FormPlayer = (props: {
       </div>
       <button
         type="submit"
-        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none"
       >
         Guardar
       </button>
+      {props.player !== null && (
+        <button
+          type="button"
+          onClick={() => deletePlayer(props.player.id)}
+          className="text-white bg-red-900 hover:bg-red-900 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none"
+        >
+          Eliminar
+        </button>
+      )}
     </form>
   );
 };
