@@ -39,16 +39,13 @@ const Leaderboard = (props: { viewMode: boolean }) => {
   };
 
   const closeModal = () => setShowModal(false);
+  const closeScoreModal = () => setShowScoreModal(false);
 
   return (
     <div className="w-3/4">
-      <Modal isOpen={showModal} onRequestClose={closeModal}>
-        <FormPlayer player={player} closeModal={closeModal} />
-      </Modal>
-
       <h1>Leaderboard</h1>
 
-      <div className="flex flex-col gap-1 h-full overflow-y-scroll ">
+      <div className="flex flex-col gap-1 h-full">
         {leaderboard.map(
           (player: { id: number; name: string; score: number }, index) => {
             let style;
@@ -135,6 +132,18 @@ const Leaderboard = (props: { viewMode: boolean }) => {
         {showScoreModal && !props.viewMode && (
           <PlayerScore player={player} setShowScoreModal={setShowScoreModal} />
         )} */}
+
+        {showModal && !props.viewMode && (
+          <Modal isOpen={showModal} onRequestClose={closeModal}>
+            <FormPlayer player={player} closeModal={closeModal} />
+          </Modal>
+        )}
+
+        {showScoreModal && !props.viewMode && player && (
+          <Modal isOpen={showScoreModal} onRequestClose={closeScoreModal}>
+            <PlayerScore player={player} closeScoreModal={closeScoreModal} />
+          </Modal>
+        )}
       </div>
     </div>
   );
