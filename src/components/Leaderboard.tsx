@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import FormPlayer from "./FormPlayer";
-import { FaEdit, FaPlus } from "react-icons/fa";
 import PlayerScore from "./PlayerScore";
 import Modal from "react-modal";
 import LeaderboardRow from "./LeaderboardRow";
