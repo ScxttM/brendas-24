@@ -65,8 +65,6 @@ const Leaderboard = (props: { viewMode: boolean }) => {
         <FormPlayer player={player} closeModal={closeModal} />
       </Modal>
 
-      <h1>Leaderboard</h1>
-
       <div className="flex flex-col h-full">
         <div className="w-full flex justify-center">
           {leaderboard.map(
@@ -112,7 +110,7 @@ const Leaderboard = (props: { viewMode: boolean }) => {
           )}
         </div>
         <div className="flex gap-2 w-full">
-          <div className="grow">
+          <div className="w-1/2">
             {leaderboard.map(
               (player: { id: number; name: string; score: number }, index) => {
                 return (
@@ -134,7 +132,7 @@ const Leaderboard = (props: { viewMode: boolean }) => {
               }
             )}
           </div>
-          <div className="grow">
+          <div className="w-1/2">
             {leaderboard.map(
               (player: { id: number; name: string; score: number }, index) => {
                 return (

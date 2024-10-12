@@ -29,10 +29,18 @@ const LeaderboardRow = (props: {
       key={props.player.id}
     >
       <div className="flex gap-2 items-center">
-        <span>
-          {props.index + 1}. {props.player.name}
-          {props.index == props.playersCount - 1 && props.index > 2 && " 💩"}
-        </span>
+        <div>
+          <span>
+            {props.index == 0 && " 🥇"}
+            {props.index == 1 && " 🥈"}
+            {props.index == 2 && " 🥉"}
+            {props.index == props.playersCount - 1 && props.index > 2 && " 💩"}
+          </span>
+          <span>
+            {props.index >= 3 && props.index <= 10 && props.index + 1 + "."}{" "}
+            {props.player.name}
+          </span>
+        </div>
         {!props.viewMode && (
           <FaEdit
             onClick={() => {

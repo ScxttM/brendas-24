@@ -13,13 +13,17 @@ const Navbar = (props: {
               className="sr-only peer"
               onChange={() => props.setViewMode(!props.viewMode)}
             />
-            <div className="relative w-11 h-6 rounded-full peer peer-checked:bg-red-600 bg-red-400 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-            <span className="ms-1">View Mode</span>
+            <div className="relative w-11 h-6 rounded-full peer peer-checked:bg-red-600 bg-red-400 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all xl:scale-150"></div>
+            <span className="ms-1 text-4xl md:text-4xl xl:text-8xl">
+              View Mode
+            </span>
           </label>
         </div>
-        <span>Brenda's 24th</span>
+        <span className="text-4xl md:text-4xl xl:text-8xl">Brenda's 24th</span>
         <div>
-          <span>11 Octubre 2024</span>
+          <span className="text-4xl md:text-4xl xl:text-8xl">
+            11 Octubre 2024
+          </span>
         </div>
       </div>
     </header>
