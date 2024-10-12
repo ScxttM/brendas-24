@@ -39,6 +39,9 @@ export default {
         black: {
           DEFAULT: "#000000",
         },
+        almostwhite: {
+          DEFAULT: "#eeeeee",
+        },
       },
     },
   },

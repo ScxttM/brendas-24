@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FormPlayer from "./FormPlayer";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import PlayerScore from "./PlayerScore";
+import Modal from "react-modal";
 
 const WS_URL: string = import.meta.env.VITE_WS_URL || "ws://localhost:8080";
 
@@ -37,38 +38,53 @@ const Leaderboard = (props: { viewMode: boolean }) => {
     });
   };
 
+  const closeModal = () => setShowModal(false);
+
   return (
     <div className="w-3/4">
+      <Modal isOpen={showModal} onRequestClose={closeModal}>
+        <FormPlayer player={player} closeModal={closeModal} />
+      </Modal>
+
       <h1>Leaderboard</h1>
 
-      <div className="flex flex-col gap-1 h-full  overflow-y-scroll ">
+      <div className="flex flex-col gap-1 h-full overflow-y-scroll ">
         {leaderboard.map(
           (player: { id: number; name: string; score: number }, index) => {
-            let bg;
+            let style;
+
             switch (index) {
               case 0:
-                bg = "bg-gold";
+                style = "bg-gold ";
                 break;
               case 1:
-                bg = "bg-silver";
+                style = "bg-silver ";
                 break;
               case 2:
-                bg = "bg-bronze";
+                style = "bg-bronze ";
                 break;
               default:
-                bg = "";
+                style = "bg-almostwhite text-xl py-1 ";
+
                 break;
             }
             return (
               <div
                 className={
-                  "flex flex-row gap-2 rounded-lg p-2 text-black justify-between " +
-                  bg
+                  "flex flex-row gap-2 rounded-lg text-black font-bold"
                 }
                 key={player.id}
               >
-                <div>
-                  {index + 1}. {player.name}
+                <div
+                  className={
+                    "flex flex-row items-center justify-start gap-2 grow rounded-lg text-4xl p-2 " +
+                    style
+                  }
+                >
+                  <span className=" ">
+                    {index + 1}. {player.name}{" "}
+                    {index == leaderboard.length - 1 && index > 2 && "💩"}
+                  </span>
                   {!props.viewMode && (
                     <FaEdit
                       onClick={() => {
@@ -79,7 +95,12 @@ const Leaderboard = (props: { viewMode: boolean }) => {
                   )}
                   {/* el icono que salga con opacity a la derecha del nombre y centrado verticalmente */}
                 </div>
-                <div>
+                <div
+                  className={
+                    "flex flex-row items-center justify-end gap-2 w-1/4 rounded-lg px-2 text-4xl " +
+                    style
+                  }
+                >
                   {player.score}
                   {!props.viewMode && (
                     <FaPlus
@@ -107,13 +128,13 @@ const Leaderboard = (props: { viewMode: boolean }) => {
           </div>
         )}
 
-        {showModal && !props.viewMode && (
+        {/* {showModal && !props.viewMode && (
           <FormPlayer player={player} setShowModal={setShowModal} />
         )}
 
         {showScoreModal && !props.viewMode && (
           <PlayerScore player={player} setShowScoreModal={setShowScoreModal} />
-        )}
+        )} */}
       </div>
     </div>
   );

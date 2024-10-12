@@ -10,7 +10,7 @@ const FormPlayer = (props: {
     name: string;
     score: number;
   } | null;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  closeModal: () => void;
 }) => {
   const [name, setName] = useState<string>(props?.player?.name || "");
 
@@ -28,7 +28,7 @@ const FormPlayer = (props: {
     axios
       .post(API_URL + "/leaderboard/player", { name })
       .then((res) => {
-        props.setShowModal(false);
+        props.closeModal();
         toast.success(res.data.message);
       })
       .catch((err) => {
@@ -41,7 +41,7 @@ const FormPlayer = (props: {
     axios
       .put(API_URL + "/leaderboard/player/" + id, { name })
       .then((res) => {
-        props.setShowModal(false);
+        props.closeModal();
         toast.success(res.data.message);
       })
       .catch((err) => {
