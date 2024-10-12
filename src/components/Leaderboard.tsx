@@ -44,27 +44,6 @@ const Leaderboard = (props: { viewMode: boolean }) => {
 
   return (
     <div className="w-3/4">
-      <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          },
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            padding: "20px",
-          },
-        }}
-      >
-        <FormPlayer player={player} closeModal={closeModal} />
-      </Modal>
-
       <div className="flex flex-col h-full">
         <div className="w-full flex justify-center">
           {leaderboard.map(
@@ -168,16 +147,25 @@ const Leaderboard = (props: { viewMode: boolean }) => {
           </div>
         )}
 
-        {/* {showModal && !props.viewMode && (
-          <FormPlayer player={player} setShowModal={setShowModal} />
-        )}
-
-        {showScoreModal && !props.viewMode && (
-          <PlayerScore player={player} setShowScoreModal={setShowScoreModal} />
-        )} */}
-
         {showModal && !props.viewMode && (
-          <Modal isOpen={showModal} onRequestClose={closeModal}>
+          <Modal
+            isOpen={showModal}
+            onRequestClose={closeModal}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              },
+              content: {
+                top: "50%",
+                left: "50%",
+                right: "auto",
+                bottom: "auto",
+                marginRight: "-50%",
+                transform: "translate(-50%, -50%)",
+                padding: "20px",
+              },
+            }}
+          >
             <FormPlayer player={player} closeModal={closeModal} />
           </Modal>
         )}
