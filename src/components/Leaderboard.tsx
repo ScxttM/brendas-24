@@ -81,12 +81,14 @@ const Leaderboard = (props: { viewMode: boolean }) => {
                 </div>
                 <div>
                   {player.score}
-                  <FaPlus
-                    onClick={() => {
-                      setPlayer(player);
-                      setShowScoreModal(true);
-                    }}
-                  />
+                  {!props.viewMode && (
+                    <FaPlus
+                      onClick={() => {
+                        setPlayer(player);
+                        setShowScoreModal(true);
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             );
