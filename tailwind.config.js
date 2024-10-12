@@ -16,7 +16,7 @@ export default {
           800: "#922522",
           900: "#792523",
           950: "#410f0e",
-          DEFAUL: "#c6302c",
+          DEFAULT: "#c6302c",
         },
         gold: {
           light: "#f9e9a1",

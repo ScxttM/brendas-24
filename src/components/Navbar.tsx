@@ -3,7 +3,7 @@ const Navbar = (props: {
   setViewMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <header className="m-5">
+    <header className="m-5 arapey text-red">
       <div className="flex flex-row justify-between">
         <div>
           <label className="inline-flex items-center cursor-pointer">
