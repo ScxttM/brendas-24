@@ -3,6 +3,8 @@ import FormPlayer from "./FormPlayer";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import PlayerScore from "./PlayerScore";
 import Modal from "react-modal";
+import LeaderboardRow from "./LeaderboardRow";
+Modal.setAppElement("#root");
 
 const WS_URL: string = import.meta.env.VITE_WS_URL || "ws://localhost:8080";
 
@@ -42,79 +44,119 @@ const Leaderboard = (props: { viewMode: boolean }) => {
 
   return (
     <div className="w-3/4">
-      <Modal isOpen={showModal} onRequestClose={closeModal}>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={closeModal}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            padding: "20px",
+          },
+        }}
+      >
         <FormPlayer player={player} closeModal={closeModal} />
       </Modal>
 
       <h1>Leaderboard</h1>
 
-      <div className="flex flex-col gap-1 h-full overflow-y-scroll ">
-        {leaderboard.map(
-          (player: { id: number; name: string; score: number }, index) => {
-            let style;
-
-            switch (index) {
-              case 0:
-                style = "bg-gold ";
-                break;
-              case 1:
-                style = "bg-silver ";
-                break;
-              case 2:
-                style = "bg-bronze ";
-                break;
-              default:
-                style = "bg-almostwhite text-xl py-1 ";
-
-                break;
+      <div className="flex flex-col h-full">
+        <div className="w-full flex justify-center">
+          {leaderboard.map(
+            (player: { id: number; name: string; score: number }, index) => {
+              return (
+                index == 0 && (
+                  <LeaderboardRow
+                    key={player.id}
+                    player={player}
+                    index={index}
+                    style={"bg-gold w-1/2"}
+                    setPlayer={setPlayer}
+                    setShowModal={setShowModal}
+                    viewMode={props.viewMode}
+                    setShowScoreModal={setShowScoreModal}
+                    playersCount={leaderboard.length}
+                  />
+                )
+              );
             }
-            return (
-              <div
-                className={
-                  "flex flex-row gap-2 rounded-lg text-black font-bold"
-                }
-                key={player.id}
-              >
-                <div
-                  className={
-                    "flex flex-row items-center justify-start gap-2 grow rounded-lg text-4xl p-2 " +
-                    style
-                  }
-                >
-                  <span className=" ">
-                    {index + 1}. {player.name}{" "}
-                    {index == leaderboard.length - 1 && index > 2 && "💩"}
-                  </span>
-                  {!props.viewMode && (
-                    <FaEdit
-                      onClick={() => {
-                        setPlayer(player);
-                        setShowModal(true);
-                      }}
+          )}
+        </div>
+        <div className="flex gap-4 justify-around">
+          {leaderboard.map(
+            (player: { id: number; name: string; score: number }, index) => {
+              return (
+                index >= 1 &&
+                index <= 2 && (
+                  <LeaderboardRow
+                    key={player.id}
+                    player={player}
+                    index={index}
+                    style={index == 1 ? "bg-silver gap-10" : "bg-bronze gap-10"}
+                    setPlayer={setPlayer}
+                    setShowModal={setShowModal}
+                    viewMode={props.viewMode}
+                    setShowScoreModal={setShowScoreModal}
+                    playersCount={leaderboard.length}
+                  />
+                )
+              );
+            }
+          )}
+        </div>
+        <div className="flex gap-2 w-full">
+          <div className="grow">
+            {leaderboard.map(
+              (player: { id: number; name: string; score: number }, index) => {
+                return (
+                  index >= 3 &&
+                  index <= 7 && (
+                    <LeaderboardRow
+                      key={player.id}
+                      player={player}
+                      index={index}
+                      style={""}
+                      setPlayer={setPlayer}
+                      setShowModal={setShowModal}
+                      viewMode={props.viewMode}
+                      setShowScoreModal={setShowScoreModal}
+                      playersCount={leaderboard.length}
                     />
-                  )}
-                  {/* el icono que salga con opacity a la derecha del nombre y centrado verticalmente */}
-                </div>
-                <div
-                  className={
-                    "flex flex-row items-center justify-end gap-2 w-1/4 rounded-lg px-2 text-4xl " +
-                    style
-                  }
-                >
-                  {player.score}
-                  {!props.viewMode && (
-                    <FaPlus
-                      onClick={() => {
-                        setPlayer(player);
-                        setShowScoreModal(true);
-                      }}
+                  )
+                );
+              }
+            )}
+          </div>
+          <div className="grow">
+            {leaderboard.map(
+              (player: { id: number; name: string; score: number }, index) => {
+                return (
+                  index >= 8 &&
+                  index <= 11 && (
+                    <LeaderboardRow
+                      key={player.id}
+                      player={player}
+                      index={index}
+                      style={""}
+                      setPlayer={setPlayer}
+                      setShowModal={setShowModal}
+                      viewMode={props.viewMode}
+                      setShowScoreModal={setShowScoreModal}
+                      playersCount={leaderboard.length}
                     />
-                  )}
-                </div>
-              </div>
-            );
-          }
-        )}
+                  )
+                );
+              }
+            )}
+          </div>
+        </div>
 
         {!props.viewMode && (
           <div
