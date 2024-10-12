@@ -16,6 +16,24 @@ export default {
         900: "#792523",
         950: "#410f0e",
       },
+      gold: {
+        light: "#f9e9a1",
+        DEFAULT: "#d4af37",
+        dark: "#b38a2a",
+      },
+      silver: {
+        light: "#e0e0e0",
+        DEFAULT: "#c0c0c0",
+        dark: "#9e9e9e",
+      },
+      bronze: {
+        light: "#cd7f32",
+        DEFAULT: "#b87333",
+        dark: "#8c5523",
+      },
+      black: {
+        DEFAULT: "#000000",
+      },
     },
   },
   plugins: [],

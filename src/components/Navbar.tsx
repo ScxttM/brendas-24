@@ -1,15 +1,14 @@
 const Navbar = () => {
   return (
     <header>
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="hidden md:block opacity-0">11 DE OCTUBRE 2024</div>
-          <div>
-            <a className="text-3xl" href="#">
-              BRENDA'S 24
-            </a>
-          </div>
-          <div>11 DE OCTUBRE 2024</div>
+      <div className="flex flex-row justify-between">
+        <div>
+          <input type="checkbox" className="" />
+          <span>Toggle admin</span>
+        </div>
+        <span>Brenda's 24th</span>
+        <div>
+          <span>11 Octubre 2024</span>
         </div>
       </div>
     </header>

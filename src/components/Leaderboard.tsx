@@ -30,35 +30,50 @@ const Leaderboard = () => {
   };
 
   return (
-    <div>
+    <div className="w-3/4">
       <h1>Leaderboard</h1>
 
-      <div className="overflow-x-auto rounded-lg border">
-        <table className="min-w-full divide-y-2">
-          <thead>
-            <tr>
-              <th className="whitespace-nowrap px-4 py-2 text-left">Name</th>
-              <th className="whitespace-nowrap px-4 py-2 text-right">Score</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {leaderboard.map(
-              (player: { id: number; name: string; score: number }) => {
-                return (
-                  <tr key={player.id}>
-                    <td className="whitespace-nowrap px-4 py-2 text-left">
-                      {player.name}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-2 text-right">
-                      {player.score}
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody>
-        </table>
+      <div className="flex flex-col gap-1 h-full  overflow-y-scroll ">
+        {leaderboard.map(
+          (player: { id: number; name: string; score: number }, index) => {
+            if (index == 0) {
+              return (
+                <div className="flex flex-row gap-2 bg-gold rounded-lg p-2 text-black justify-between">
+                  <div>{player.name}</div>
+                  <div>{player.score}</div>
+                </div>
+              );
+            } else if (index == 1) {
+              return (
+                <div className="flex flex-row gap-2 bg-silver rounded-lg p-2 text-black justify-between">
+                  <div>{player.name}</div>
+                  <div>{player.score}</div>
+                </div>
+              );
+            } else if (index == 2) {
+              return (
+                <div className="flex flex-row gap-2 bg-bronze rounded-lg p-2 text-black justify-between">
+                  <div>{player.name}</div>
+                  <div>{player.score}</div>
+                </div>
+              );
+            } else {
+              return (
+                <div className="flex flex-row gap-2 rounded-lg p-2 text-black justify-between">
+                  <div className="flex">
+                    <div>
+                      {index + 1} {player.name}
+                    </div>
+                  </div>
+                  <div>{player.score}</div>
+                </div>
+              );
+            }
+          }
+        )}
+        <div className="flex flex-row gap-2 rounded-lg p-2 text-black justify-center bg-silver-light">
+          <span>Agregar Jugador</span>
+        </div>
       </div>
     </div>
   );
