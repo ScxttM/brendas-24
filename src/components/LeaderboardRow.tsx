@@ -43,6 +43,7 @@ const LeaderboardRow = (props: {
         </div>
         {!props.viewMode && (
           <FaEdit
+            className="text-neutral opacity-20 sm:text-xl text-2xl xl:text-6xl"
             onClick={() => {
               props.setPlayer(props.player);
               props.setShowModal(true);
@@ -54,6 +55,7 @@ const LeaderboardRow = (props: {
         <span>{props.player.score}</span>
         {!props.viewMode && (
           <FaPlus
+            className="text-neutral opacity-20 sm:text-xl text-2xl xl:text-6xl"
             onClick={() => {
               props.setPlayer(props.player);
               props.setShowScoreModal(true);
