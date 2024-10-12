@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
+import FormPlayer from "./FormPlayer";
+import { FaEdit, FaPlus } from "react-icons/fa";
+import PlayerScore from "./PlayerScore";
 
 const WS_URL: string = import.meta.env.VITE_WS_URL || "ws://localhost:8080";
-// const API_URL: string =
-//   process.env.REACT_APP_API_URL || "http://localhost:3000";
 
-const Leaderboard = () => {
+const Leaderboard = (props: { viewMode: boolean }) => {
   const [leaderboard, setLeaderboard] = useState([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [player, setPlayer] = useState<{
+    id: number;
+    name: string;
+    score: number;
+  } | null>(null);
+  const [showScoreModal, setShowScoreModal] = useState<boolean>(false);
 
   useEffect(() => {
     connectWs();
@@ -36,44 +44,74 @@ const Leaderboard = () => {
       <div className="flex flex-col gap-1 h-full  overflow-y-scroll ">
         {leaderboard.map(
           (player: { id: number; name: string; score: number }, index) => {
-            if (index == 0) {
-              return (
-                <div className="flex flex-row gap-2 bg-gold rounded-lg p-2 text-black justify-between">
-                  <div>{player.name}</div>
-                  <div>{player.score}</div>
-                </div>
-              );
-            } else if (index == 1) {
-              return (
-                <div className="flex flex-row gap-2 bg-silver rounded-lg p-2 text-black justify-between">
-                  <div>{player.name}</div>
-                  <div>{player.score}</div>
-                </div>
-              );
-            } else if (index == 2) {
-              return (
-                <div className="flex flex-row gap-2 bg-bronze rounded-lg p-2 text-black justify-between">
-                  <div>{player.name}</div>
-                  <div>{player.score}</div>
-                </div>
-              );
-            } else {
-              return (
-                <div className="flex flex-row gap-2 rounded-lg p-2 text-black justify-between">
-                  <div className="flex">
-                    <div>
-                      {index + 1} {player.name}
-                    </div>
-                  </div>
-                  <div>{player.score}</div>
-                </div>
-              );
+            let bg;
+            switch (index) {
+              case 0:
+                bg = "bg-gold";
+                break;
+              case 1:
+                bg = "bg-silver";
+                break;
+              case 2:
+                bg = "bg-bronze";
+                break;
+              default:
+                bg = "";
+                break;
             }
+            return (
+              <div
+                className={
+                  "flex flex-row gap-2 rounded-lg p-2 text-black justify-between " +
+                  bg
+                }
+                key={player.id}
+              >
+                <div>
+                  {index + 1}. {player.name}
+                  {!props.viewMode && (
+                    <FaEdit
+                      onClick={() => {
+                        setPlayer(player);
+                        setShowModal(true);
+                      }}
+                    />
+                  )}
+                  {/* el icono que salga con opacity a la derecha del nombre y centrado verticalmente */}
+                </div>
+                <div>
+                  {player.score}
+                  <FaPlus
+                    onClick={() => {
+                      setPlayer(player);
+                      setShowScoreModal(true);
+                    }}
+                  />
+                </div>
+              </div>
+            );
           }
         )}
-        <div className="flex flex-row gap-2 rounded-lg p-2 text-black justify-center bg-silver-light">
-          <span>Agregar Jugador</span>
-        </div>
+
+        {!props.viewMode && (
+          <div
+            className="flex flex-row gap-2 rounded-lg p-2 text-black justify-center bg-silver-light"
+            onClick={() => {
+              setPlayer(null);
+              setShowModal(true);
+            }}
+          >
+            <span>Agregar participante</span>
+          </div>
+        )}
+
+        {showModal && !props.viewMode && (
+          <FormPlayer player={player} setShowModal={setShowModal} />
+        )}
+
+        {showScoreModal && !props.viewMode && (
+          <PlayerScore player={player} setShowScoreModal={setShowScoreModal} />
+        )}
       </div>
     </div>
   );
